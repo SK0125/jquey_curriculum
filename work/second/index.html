@@ -24,9 +24,38 @@
 // 今回やるのはモーダルです。
 // .modal-show をクリックすることで .modal をfadeInさせる。
 // .modal-close をクリックで .modal をfadeOutさせる。
+
+$( function() {
+  $('.modal-show').click( function() {
+    $('.modal').fadeIn('slow');
+  });
+  $('.modal-close').click( function() {
+    $('.modal').fadeOut('slow');
+  });
+});
+
 // .click() クリック時のイベントを登録する。
+
+
+
 // .fadeIn() 一定時間かけてフェードインする。
 // .fadeOut() 一定時間かけてフェードアウトする。
+
+// $( function() {
+//   $('.modal-show').click( function() {
+//     $('.modal').fadeIn(2000);
+//   });
+//   $('.modal-close').click( function() {
+//     $('.modal').fadeOut(1000);
+//   });
+// });
+
+
+
+
+
+
+
 </script>
 </body>
 </html>
