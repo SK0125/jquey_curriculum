@@ -100,15 +100,15 @@ $(function() {
 
 // 第6問  id='q6'の要素をクリックしたらこの要素を2秒かけてmargin-topとmargin-leftを100pxの位置に移動させよ。
   $('#q6').on('click', function() {
-    $(this).css({
-      margin:'100px 0 0 100px',
-      transition: 'all 2s'
-    });
+    $(this).animate({
+      margin: '100px 0 0 100px'
+    }, 2000);
   });
 
 // 第7問  id='q7'の子要素をクリックしたら、その要素のインデックス（何番目か）をconsole.log()とalert()を用いて表示させよ。
-  $('#q7 li').on('click', function() {
-    var number = $('#q7 li').index(this);
+  $('#q7').find('li').on('click', function() {
+    var number = $(this).index();
+
     console.log(number);
     alert(number);
   });
@@ -123,15 +123,17 @@ $(function() {
   });
 // 第9問  id='q9'の要素をクリックしたらこの要素に設定してあるdata属性をconsoleに表示せよ。
 
-  $('#q9').click(function() {
-    var data = $('#q9').data('text');
+  $('#q9').on('click', function() {
+    var data = $(this).data('text');
+
     console.log(data);
   });
 
 // 第10問 id='q10'の子要素をクリックしたら、その要素のインデックスと等しいid='q11'の子要素にlargeというクラスを追加せよ。
-  $('#q10 li').click( function() {
-    var number = $('#q10 li').index(this);
-    $('#q11 li').eq(number).addClass('large');
+  $('#q10').find('li').on('click', function() {
+    var number = $(this).index();
+    
+    $('#q11').find('li').eq(number).addClass('large');
   });
 });
 </script>
