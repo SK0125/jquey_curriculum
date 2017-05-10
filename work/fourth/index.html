@@ -60,16 +60,18 @@
 $(function() {
   $('.menu__list').children().hover(        //.children()ではなく.find('li')の場合、直下のli以外にliを取得してしまう
     function() {
-      var number = $(this).index();
+      // var number = $(this).index();
 
-      $('.menu__list').children().eq(number).find('.menu__list__childList').stop();             //直前のアニメーションを停止させる
-      $('.menu__list').children().eq(number).find('.menu__list__childList').slideDown('slow');
+      // $('.menu__list').children().eq(number).find('.menu__list__childList').stop().slideDown('slow');             //直前のアニメーションを停止させる
+      // $('.menu__list').children().eq(number).find('.menu__list__childList').slideDown('slow');
+      $(this).children().next().stop().slideDown();
     },
     function() {
-      var number = $(this).index();
+      // var number = $(this).index();
 
-      $('.menu__list').children().eq(number).find('.menu__list__childList').stop();            //直前のアニメーションを停止させる
-      $('.menu__list').children().eq(number).find('.menu__list__childList').slideUp('slow');
+      // $('.menu__list').children().eq(number).find('.menu__list__childList').stop().slideUp('slow');            //直前のアニメーションを停止させる
+      // $('.menu__list').children().eq(number).find('.menu__list__childList').slideUp('slow');
+      $(this).children().next().stop().slideUp();
     });
 });
 
