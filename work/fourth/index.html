@@ -56,6 +56,23 @@
 // .next() 要素の隣の要素を取得します。
 // .children() 要素の子要素を取得します。
 // .stop() 現在動作中のアニメーション処理を全て中止します。
+
+$(function() {
+  $('.menu__list').children().hover(        //.children()ではなく.find('li')の場合、直下のli以外にliを取得してしまう
+    function() {
+      var number = $(this).index();
+
+      $('.menu__list').children().eq(number).find('.menu__list__childList').stop();             //直前のアニメーションを停止させる
+      $('.menu__list').children().eq(number).find('.menu__list__childList').slideDown('slow');
+    },
+    function() {
+      var number = $(this).index();
+
+      $('.menu__list').children().eq(number).find('.menu__list__childList').stop();            //直前のアニメーションを停止させる
+      $('.menu__list').children().eq(number).find('.menu__list__childList').slideUp('slow');
+    });
+});
+
 </script>
 </body>
 </html>
