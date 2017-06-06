@@ -31,13 +31,57 @@
 // .addClass() クラスを追加します。
 // .removeClass() クラスを削除します。
 
-$(function() {
-  $('.nav').find('li').on('click', function() {
-    var number = $(this).index();
+// $(function() {
+//   $('.nav').find('li').on('click', function() {
+//     var number = $(this).index();
     
-    $('.contents').find('li').addClass('is-hidden');
-    $('.contents').find('li').eq(number).removeClass('is-hidden');
+//     // $('.contents').find('li').addClass('is-hidden');
+//     // $('.contents').find('li').eq(number).removeClass('is-hidden');
+//     // ↓なら一行でかける
+//     $('.contents').find('li').addClass('is-hidden').eq(number).removeClass('is-hidden');
+//   });
+// });
+
+
+//Lesson6問題1
+//
+// $(function() {
+//   var $navItem = $('.nav').find('li');
+//   var $contentsItem = $('.contents').find('li');
+
+//   $navItem.on('click', function() {
+//     var index = $(this).index();
+//     $contentsItem
+//       .addClass('is-hidden')
+//       .eq(index)
+//       .removeClass('is-hidden');
+//   });
+// });
+
+function Tab() {
+  this.$navItem = $('.nav').find('li');
+  this.$contentsItem = $('.contents').find('li');
+  this.bind();
+}
+
+Tab.prototype.bind = function {
+  this.$navItem.on('click', function() {
+    var index = $(this).index();
+
+    $contentsItem.AddClass.eq().RemoveClass.bind(this);
   });
+}
+
+Tab.prototype.AddClass = function() {
+  this.$contentsItem.addClass('is-hidden');
+}
+
+Tab.prototype.RemoveClass = function() {
+  this.$contentsItem.removeClass('is-hidden');
+}
+
+$(function() {
+  var tab = new Tab();
 });
 
 </script>

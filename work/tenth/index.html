@@ -63,7 +63,46 @@
   // }).done(function(data) {
   //   // この中にデータ取得後の動きを記述していきます。
   // });
-//
+
+$( function() {
+  $('.search__btn').on('click', function() {
+    var search = $('.search__text__input').val();
+
+    $.ajax({
+      url: 'https://app.rakuten.co.jp/services/api/BooksTotal/Search/20130522',
+      type: 'GET',
+      datatype: 'json',
+      data: {
+      // 「区分:サービス固有パラメーター」を確認して、必要な情報をdata内に入れましょう。
+        applicationId: '1019399324990976605', // (今回はこのIDを使用してください)
+        booksGenreId: '001',                  //ジャンルを特定するためのID
+        keyword: search,
+        hits: 20
+      }
+    })
+    .done( function(data) {
+      var d = '';
+
+      for ( var i = 0; i < data.Items.length; i++ ) {
+        d += "<li class='lists__item'><div class='lists__item__inner'><a href='' class='lists__item__link' target='_blank'><img src='"
+          + data.Items[i].Item.largeImageUrl
+          + "' class='lists__item__img' alt=''><p class='lists__item__detail'>作品名："
+          + data.Items[i].Item.title
+          + "</p><p class='lists__item__detail'>作者　："
+          + data.Items[i].Item.author
+          + "</p><p class='lists__item__detail'>出版社："
+          + data.Items[i].Item.publisherName
+          + "</p></a></div></li>";
+      }
+      $('.lists').html(d);
+
+      //console.log(d);
+      // console.log(data);
+      // console.log(data.Items[0].Item.author);
+      // console.log(a);
+    });
+  });
+});
 </script>
 </body>
 </html>

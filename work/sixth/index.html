@@ -26,6 +26,27 @@
 // .keyup() 文字入力後に発火されるイベントです。
 // .replace(/\s+/g,'').length 改行を含まない文字数を取得します。
 // .val() input要素のvalueを取得します。
+
+$(function() {
+  var countMax = 30;
+  $('.input').on('keyup', function() {
+    var inputLength = $(this).val().replace(/\s+/g,'').length;    //正規表現 +:+の直前の文字が1個以上連続したものにマッチ　いる？
+    var countValue = countMax - inputLength;
+
+    $('.rest-count').html(countValue);
+    if (countValue < 0) {
+      $('.rest-count').addClass('red');
+    } else {
+      $('.rest-count').removeClass('red');      //elseを記載しない場合、０以下になった後、クラスredが消えない
+    }
+  });
+});
+
+//正規表現
+//特定の文字
+//　/〇〇/,'abc'  最初のパターン（//の中身）を'abc'に変換
+//　/〇〇/g,'abc'  すべてのパターンを'abc'に変換する　g:すべての要素
+
 </script>
 </body>
 </html>

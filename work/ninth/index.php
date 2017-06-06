@@ -46,14 +46,14 @@
 //
 // このテンプレートに取得してきたオブジェクトを流し込みます。
 
-$(function) {
-  $.ajax({
-    url: './data.json'
-  })
-  .done(function(data) {
-    console.log(data);
-  });
-};
+// $(function() {
+//   $.ajax({
+//     url: './data.json'
+//   })
+//   .done(function(data) {
+//     console.log(data);
+//   });
+// });
 
 
 // $(function() {
@@ -61,14 +61,35 @@ $(function) {
 //     url:'./data.json'
 //   })
 //   .done(function(data) {
-//     for(var d="",i=0; i<data.colorArry.length; i++)
-//       d+='<li class="colorList__item"><p class="colorList__title" style="background-color: '+data.colorArry[i].hexValue+';">'+data.colorArry[i].colorName+"</p></li>";
+//     for(var a=data.colorArry.length(),d="",i=0; i<a; i++) {
+//       d+='<li class="colorList__item"><p class="colorList__title" style="background-color: '+a[i].hexValue+';">'+a[i].colorName+"</p></li>";
 //     $('.colorList').html(d);
+//     }
 //   });
 // });
 
-//http://localhost:8888/work/ninth/index.php
+$(function(){
+  $.ajax({
+    url:'./data.json'
+  })
+  .done(function(data) {
+    //var d = '';
 
+    for( var i = 0; i < data.colorsArray.length; i++ ) {
+        var d = '<li class="colorList__item"><p class="colorList__title" style="background-color:'
+       //d += '<li class="colorList__item"><p class="colorList__title" style="background-color:'
+            + data.colorsArray[i].hexValue
+            +' ;">'
+            + data.colorsArray[i].colorName
+            + '</p></li>';
+        $('.colorList').append(d);
+    }
+        // $('.colorList').html(d);
+    // console.log(data);
+    // console.log(data.colorsArray[0]);
+    // console.log(data.colorsArray.length);
+  });
+});
 
 </script>
 </body>

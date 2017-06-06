@@ -34,6 +34,79 @@
 // .data() 要素のdata属性を取得します。
 // .width() 要素の幅を取得します。
 // .length 要素の個数を取得します。
+// 
+// $(function() {
+//   var width_img = $('.slider-list').children().width(),
+//       arry = [0,-width_img,-width_img*2,-width_img*3],
+//       position = 0;
+
+//   // var arry = $('.slider-list').children().each( function() {
+//   //   var arry = $(this).width();
+//   //   console.log(this);
+//   //   console.log(arry);
+//   // });
+
+//   $('.slider-ctrl-btn').on('click', function() {
+//     var data = $(this).data('ctrl');
+
+//     if ( data == 'next' ) {
+//       position += 1;
+
+//       if ( position == arry.length) {
+//         position = position - arry.length;
+//       }
+
+//       $('.slider-list').stop().animate({
+//         left: arry[position]
+//       }, 'slow');
+//       //$('.slider-list').css('left', arry[position]);
+//     } else {
+//       position -= 1;
+
+//       if ( position < 0) {
+//         position = position + arry.length;
+//       }
+
+//       $('.slider-list').stop().animate({
+//         left: arry[position]
+//       }, 'slow');
+//     }
+//   });
+// });
+  $(function() {
+    var $sliderList = $('.slider-list');
+    var imgWidth = $sliderList.children().width();
+    var imgLength = $sliderList.children().length - 1;
+    var current = 0;
+
+    $('.slider-ctrl-btn').on('click', function() {
+      var data = $(this).data('ctrl');
+
+      if (data === 'next') {
+        current++;
+        slider();
+      } else if (data === 'prev') {
+        current--;
+        slider();
+      }
+    });
+
+    function slider() {
+      if (current > imgLength) {
+        current = 0;
+      }
+
+      if (current < 0) {
+        current = imgLength;
+      }
+
+      $sliderList.animate({
+        left: -imgWidth * current
+      })
+    }
+  });
+
+
 </script>
 </body>
 </html>

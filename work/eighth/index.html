@@ -42,6 +42,43 @@
 // .offset().top 要素の位置を取得します。
 // .fadeIn() 要素をフェードインさせる。
 // .fadeOut() 要素をフェードアウトさせる。
+$(function() {
+  $('.menu__btn').on('click', function() {
+    var data = $(this).data('scroll-place-type');
+
+    // if ( data === 'home') {
+      // var titlePosition = $('.title[data-scroll-place-type="home"]').offset().top;
+    // } else if ( data === 'news') {
+      // var titlePosition = $('.title[data-scroll-place-type="news"]').offset().top;
+    // } else {
+      // var titlePosition = $('.title[data-scroll-place-type="about"]').offset().top;
+    // }
+    // scroll(titlePosition);
+    scroll($('.title[data-scroll-place-type="'+data+'"]').offset().top);
+    // $('body').animate({scrollTop: titlePosition}, "slow");
+  });
+
+  $(window).on('scroll', function() {
+    var windowPosition = $(window).scrollTop();
+    
+    windowPosition >= 100 ? fadeIn(500) : fadeOut(500);
+  //   if ( windowPosition >= 100) {
+  //     $('.scrollTopBtn').fadeIn(500);
+  //   } else {
+  //     $('.scrollTopBtn').fadeOut(500);  //三項演算子
+  //   }
+  // });
+
+  $('.scrollTopBtn').on('click', function() {
+    scroll(0);
+    // $('body').animate({scrollTop:0},"slow");
+  });
+
+  function scroll(x) {
+    $('body').animate({scrollTop:x},"slow");
+  }
+});
+
 </script>
 </body>
 </html>

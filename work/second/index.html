@@ -28,14 +28,14 @@
 // .fadeIn() 一定時間かけてフェードインする。
 // .fadeOut() 一定時間かけてフェードアウトする。
 
-$(function() {
-  $('.modal-show').on('click', function() {
-    $('.modal').fadeIn('slow');
-  })
-  $('.modal-close').on('click', function() {
-    $('.modal').fadeOut('slow');
-  });
-});
+// $(function() {
+//   $('.modal-show').on('click', function() {
+//     $('.modal').fadeIn('slow');
+//   })
+//   $('.modal-close').on('click', function() {
+//     $('.modal').fadeOut('slow');
+//   });
+// });
 
 // $( function() {
 //   $('.modal-show').click( function() {
@@ -45,6 +45,33 @@ $(function() {
 //     $('.modal').fadeOut(1000);
 //   });
 // });
+
+function Modal() {
+  this.$modal = $('.modal');
+  this.$modalShow = $('.modal-show');
+  this.$modalClose = $('.modal-close');
+  this.ANIMATE_TIME = 500;
+  this.bind();
+}
+
+Modal.prototype.bind = function() {
+  this.$modalShow.on('click', this.show.bind(this));
+  this.$modalClose.on('click', this.hide.bind(this));
+  console.log(this);
+};
+
+Modal.prototype.show = function() {
+  this.$modal.fadeIn(this.ANIMATE_TIME);
+};
+
+Modal.prototype.hide= function() {
+  this.$modal.fadeOut(this.ANIMATE_TIME);
+};
+
+$(function() {
+  var modal = new Modal();
+});
+
 
 </script>
 </body>

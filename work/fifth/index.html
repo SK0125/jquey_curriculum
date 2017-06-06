@@ -100,11 +100,12 @@
 
 $(function() {
   $('.select').on('change', function() {
+    var selectVal = $('.select').val();
+
     $('.list').children().each(function() {
-      var val = $('.select').val();
       var data = $(this).data('category-type');
 
-      if ( val === 'all' || val === data) {
+      if (selectVal === 'all' || selectVal === data) {
         $(this).show();
       } else {
         $(this).hide();
