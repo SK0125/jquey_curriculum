@@ -46,26 +46,26 @@
 //
 // このテンプレートに取得してきたオブジェクトを流し込みます。
 
-$(function) {
-  $.ajax({
-    url: './data.json'
-  })
-  .done(function(data) {
-    console.log(data);
-  });
-};
-
-
-// $(function() {
+// $(function) {
 //   $.ajax({
-//     url:'./data.json'
+//     url: './data.json'
 //   })
 //   .done(function(data) {
-//     for(var d="",i=0; i<data.colorArry.length; i++)
-//       d+='<li class="colorList__item"><p class="colorList__title" style="background-color: '+data.colorArry[i].hexValue+';">'+data.colorArry[i].colorName+"</p></li>";
-//     $('.colorList').html(d);
+//     console.log(data);
 //   });
-// });
+// };
+
+
+$(function() {
+  $.ajax({
+    url:'./data.json'
+  })
+  .done(function(data) {
+    for(var d="",i=0; i<data.colorArry.length; i++)
+      d+='<li class="colorList__item"><p class="colorList__title" style="background-color: '+data.colorArry[i].hexValue+';">'+data.colorArry[i].colorName+"</p></li>";
+    $('.colorList').html(d);
+  });
+});
 
 //http://localhost:8888/work/ninth/index.php
 

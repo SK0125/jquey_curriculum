@@ -65,9 +65,26 @@
   // });
 
 $( function() {
-  $('.search__btn').on('click', function() {
-    var search = $('.search__text__input').val();
+  var SearchPrev = '',
+      CountPage = 0;
 
+  //検索結果が見つからない場合の表示を非表示で挿入
+  $('.search').after("<div class='message'>検索結果が見つかりませんでした。<br>別のキーワードで検索してください。</div>");
+  $('.message').hide();
+
+  //検索ボタンクリック時の動作
+  $('.search__btn').on('click', function() {
+    var Search = $('.search__text__input').val();
+
+    //取得ページを決定
+    if ( Search === SearchPrev ) {
+      CountPage ++;
+    } else {
+      CountPage = 1;
+    }
+    SearchPrev = Search;
+
+    //データ取得後の挙動
     $.ajax({
       url: 'https://app.rakuten.co.jp/services/api/BooksTotal/Search/20130522',
       type: 'GET',
@@ -76,33 +93,60 @@ $( function() {
       // 「区分:サービス固有パラメーター」を確認して、必要な情報をdata内に入れましょう。
         applicationId: '1019399324990976605', // (今回はこのIDを使用してください)
         booksGenreId: '001',                  //ジャンルを特定するためのID
-        keyword: search,
-        hits: 20
+        keyword: Search,
+        hits: 20,
+        page: CountPage
       }
-    })
-    .done( function(data) {
-      var d = '';
+    }).done( function(data) {      //データ取得成功時の挙動
+      var Result = '';
 
-      for ( var i = 0; i < data.Items.length; i++ ) {
-        d += "<li class='lists__item'><div class='lists__item__inner'><a href='' class='lists__item__link' target='_blank'><img src='"
-          + data.Items[i].Item.largeImageUrl
-          + "' class='lists__item__img' alt=''><p class='lists__item__detail'>作品名："
-          + data.Items[i].Item.title
-          + "</p><p class='lists__item__detail'>作者　："
-          + data.Items[i].Item.author
-          + "</p><p class='lists__item__detail'>出版社："
-          + data.Items[i].Item.publisherName
-          + "</p></a></div></li>";
+      $('.message').hide();        //「メッセージ表示を隠す」にリセット
+      //forEach文の場合
+      data.Items.forEach( function(value) {
+        Result += "<li class='lists__item'><div class='lists__item__inner'><a href='"
+               + value.Item.itemUrl
+               + "' class='lists__item__link' target='_blank'><img src='"
+               + value.Item.largeImageUrl
+               + "' class='lists__item__img' alt=''><p class='lists__item__detail'>作品名："
+               + value.Item.title
+               + "</p><p class='lists__item__detail'>作者　："
+               + value.Item.author
+               + "</p><p class='lists__item__detail'>出版社："
+               + value.Item.publisherName
+               + "</p></a></div></li>";
+      });
+      // for ( var i = 0; i < data.Items.length; i++ ) {   //取得データをリスト化
+      //for文の場合
+      //   Result += "<li class='lists__item'><div class='lists__item__inner'><a href='"
+      //          + data.Items[i].Item.itemUrl
+      //          + "' class='lists__item__link' target='_blank'><img src='"
+      //          + data.Items[i].Item.largeImageUrl
+      //          + "' class='lists__item__img' alt=''><p class='lists__item__detail'>作品名："
+      //          + data.Items[i].Item.title
+      //          + "</p><p class='lists__item__detail'>作者　："
+      //          + data.Items[i].Item.author
+      //          + "</p><p class='lists__item__detail'>出版社："
+      //          + data.Items[i].Item.publisherName
+      //          + "</p></a></div></li>";
+      // }
+
+      //検索結果表示
+      if ( CountPage === 1) {       //1ページ目の場合
+        $('.lists').html(Result);
+      } else {                      //2ページ目以降の場合
+        $('.lists').prepend(Result);
       }
-      $('.lists').html(d);
-
-      //console.log(d);
-      // console.log(data);
-      // console.log(data.Items[0].Item.author);
-      // console.log(a);
+      //検索結果がヒットしなかったとき
+      if ( data.Items.length === 0) {
+        $('.message').show();
+      }
+    }).fail( function(data) {       //データ取得失敗したときの挙動
+      $('.lists').html('');
+      $('.message').hide();
     });
   });
 });
+
 </script>
 </body>
 </html>

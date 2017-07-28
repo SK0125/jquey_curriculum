@@ -34,7 +34,7 @@
 // $(function() {
 //   $('.nav').find('li').on('click', function() {
 //     var number = $(this).index();
-    
+
 //     // $('.contents').find('li').addClass('is-hidden');
 //     // $('.contents').find('li').eq(number).removeClass('is-hidden');
 //     // ↓なら一行でかける
@@ -64,11 +64,11 @@ function Tab() {
   this.bind();
 }
 
-Tab.prototype.bind = function {
+Tab.prototype.bind = function() {
   this.$navItem.on('click', function() {
     var index = $(this).index();
 
-    $contentsItem.AddClass.eq().RemoveClass.bind(this);
+    this.$contentsItem.AddClass.eq(index).RemoveClass.bind(this);
   });
 }
 
