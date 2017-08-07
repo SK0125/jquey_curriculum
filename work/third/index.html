@@ -34,7 +34,7 @@
 // $(function() {
 //   $('.nav').find('li').on('click', function() {
 //     var number = $(this).index();
-
+    
 //     // $('.contents').find('li').addClass('is-hidden');
 //     // $('.contents').find('li').eq(number).removeClass('is-hidden');
 //     // ↓なら一行でかける
@@ -61,24 +61,32 @@
 function Tab() {
   this.$navItem = $('.nav').find('li');
   this.$contentsItem = $('.contents').find('li');
+  console.log(this.$contentsItem);
   this.bind();
 }
 
 Tab.prototype.bind = function() {
   this.$navItem.on('click', function() {
     var index = $(this).index();
+    //console.log(event.target);
+    console.log(this);
+    console.log(this.$contentsItem);
 
-    this.$contentsItem.AddClass.eq(index).RemoveClass.bind(this);
+    // this.$contentsItem.AddClass.eq(index).RemoveClass.bind(this);
+    // $('.contents').find('li').AddClass.eq(index).RemoveClass;
+    $('.contents').find('li').addClass('is-hidden').eq(index).removeClass('is-hidden');
   });
-}
+};
 
 Tab.prototype.AddClass = function() {
-  this.$contentsItem.addClass('is-hidden');
-}
+  // this.$contentsItem.addClass('is-hidden');
+  $('.contents').find('li').addClass('is-hidden');
+};
 
 Tab.prototype.RemoveClass = function() {
-  this.$contentsItem.removeClass('is-hidden');
-}
+  // this.$contentsItem.removeClass('is-hidden');
+  $('.contents').find('li').removeClass('is-hidden');
+};
 
 $(function() {
   var tab = new Tab();
