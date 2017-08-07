@@ -103,6 +103,7 @@ $( function() {
 
   function Done(data) {
     var Result = '';
+    console.log(data);
 
     $('.message').empty();        //メッセージをリセット
     data.Items.forEach( function(value) {
@@ -123,9 +124,9 @@ $( function() {
       $('.message').html("検索結果が見つかりませんでした。<br>別のキーワードで検索してください。");
     }
   }
-  function Fail() {
-        $('.lists').empty();
-        $('.message').html("検索ワードが正しくありません。<br>別のキーワードで検索してください。");
+  function Fail(err) {
+    $('.lists').empty();
+    $('.message').html(err.responseJSON.error_description);
   }
 });
 
